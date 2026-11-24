@@ -1,5 +1,11 @@
-const CACHE_NAME = 'ibs-companion-shell-v2';
-const APP_SHELL = ['/', '/index.html', '/index.css', '/manifest.webmanifest', '/icon.svg'];
+const BASE_URL = new URL('./', self.location.href).pathname;
+const CACHE_NAME = 'ibs-companion-shell-v3';
+const APP_SHELL = [
+  BASE_URL,
+  `${BASE_URL}index.html`,
+  `${BASE_URL}manifest.webmanifest`,
+  `${BASE_URL}icon.svg`
+];
 
 self.addEventListener('install', event => {
   event.waitUntil(Promise.all([
@@ -33,11 +39,11 @@ self.addEventListener('fetch', event => {
           const response = await fetch(request);
           if (response.ok) {
             const cache = await caches.open(CACHE_NAME);
-            await cache.put('/index.html', response.clone());
+            await cache.put(`${BASE_URL}index.html`, response.clone());
           }
           return response;
         } catch {
-          return (await caches.match('/index.html')) || Response.error();
+          return (await caches.match(`${BASE_URL}index.html`)) || Response.error();
         }
       })()
     );

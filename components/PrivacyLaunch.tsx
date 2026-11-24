@@ -1,5 +1,5 @@
 import React from 'react';
-import { AlertTriangle, BookOpenCheck, Database, Download, ShieldCheck, Sparkles } from 'lucide-react';
+import { AlertTriangle, Database, Download, Sparkles } from 'lucide-react';
 
 const PrivacyLaunch: React.FC = () => (
   <div className="h-full overflow-y-auto px-4 py-6 sm:p-8">
@@ -92,19 +92,30 @@ const PrivacyLaunch: React.FC = () => (
           <h3 id="launch-heading" className="text-xl font-semibold text-white">Not yet ready for unrestricted public launch</h3>
         </div>
         <p className="mb-4 text-sm leading-6 text-slate-300">
-          This screen is an explanation of the current prototype, not a published privacy policy, terms of service,
-          or support channel. Before public use, the product owner still needs to:
+          This screen and the linked pages are launch drafts, not a substitute for legal review. Complete these
+          steps in order; keep AI disabled until the audience, region, provider terms, and data handling are approved.
         </p>
-        <ul className="space-y-3 text-sm leading-6 text-slate-200">
-          <li className="flex gap-2"><ShieldCheck size={18} className="mt-1 shrink-0 text-amber-300" aria-hidden="true" /><span>Publish accurate privacy, terms, and support information, including applicable data handling and deletion details.</span></li>
-          <li className="flex gap-2"><Sparkles size={18} className="mt-1 shrink-0 text-amber-300" aria-hidden="true" /><span>Do not launch the current consumer-facing AI features on Gemini API without confirming an allowed use. Google&apos;s current terms describe API use as professional or business use, not consumer use, and prohibit clients directed to or likely to be accessed by people under 18. Choose a provider and audience the product is permitted to serve.</span></li>
-          <li className="flex gap-2"><BookOpenCheck size={18} className="mt-1 shrink-0 text-amber-300" aria-hidden="true" /><span>Confirm permissions for scripture translations and other content used in the actual experience.</span></li>
-          <li className="flex gap-2"><AlertTriangle size={18} className="mt-1 shrink-0 text-amber-300" aria-hidden="true" /><span>Add server-side abuse prevention, rate limiting, and provider cost controls before exposing AI features to public traffic.</span></li>
-        </ul>
+        <ol className="list-decimal space-y-3 pl-5 text-sm leading-6 text-slate-200 marker:font-semibold marker:text-amber-300">
+          <li><strong>Choose the first audience and launch regions.</strong> Google&apos;s current Gemini API terms limit use to professional or business purposes, prohibit clients directed to or likely to be accessed by people under 18, and require Paid Services for users in the EEA, UK, and Switzerland. This consumer-facing study app should not enable Gemini unless the actual use is permitted; keep <code>AI_ENABLED=false</code> or select a suitable provider.</li>
+          <li><strong>Clear content and brand rights.</strong> Obtain permission for the exact Bible translation, method references, fonts, images, and marketing copy used, including commercial use and sending text to an AI provider.</li>
+          <li><strong>Finalize operator policies and support.</strong> Replace the linked draft pages with accurate privacy, terms, support, contact, and data deletion/refund information. Document local browser storage, AI disclosures, hosting logs, retention, and how users can reach the operator.</li>
+          <li><strong>Control production risk and cost.</strong> Add reliable server-side rate limits, abuse monitoring, provider quotas and budget alerts. The current endpoint limits requests but does not provide production-grade abuse or cost control.</li>
+          <li><strong>Test a production preview.</strong> Verify HTTPS/PWA install, mobile and keyboard access, study recovery, backup/restore, error states, and AI-off behavior. Review any enabled AI output and confirm its privacy and provider terms.</li>
+          <li><strong>Launch the web/PWA pilot first.</strong> Use a commercial-eligible hosting plan if operating commercially. This project is not configured as a native iOS or Android store submission; packaging for stores requires native work, store accounts, metadata, assets, review access, and platform-specific policy checks.</li>
+        </ol>
+        <div className="mt-5 rounded-xl border border-slate-700 bg-slate-800/70 p-4">
+          <h4 className="font-semibold text-white">Monetize only after the pilot proves demand</h4>
+          <p className="mt-2 text-sm leading-6 text-slate-300">
+            Keep the core study workflow free while interviewing learners and small-group leaders and measuring repeat use.
+            Test paid templates, polished exports, or leader-prepared group guides as hypotheses—not promises. The app has no
+            accounts, shared storage, checkout, or paid-feature enforcement today, so do not sell cloud sync or group access
+            until those capabilities and their privacy, tax, refund, and cancellation flows exist. Avoid unlimited AI.
+          </p>
+        </div>
         <div className="mt-5 flex flex-wrap gap-4 text-sm">
-          <a href="/privacy.html" className="underline underline-offset-4">Privacy notice</a>
-          <a href="/terms.html" className="underline underline-offset-4">Terms of use</a>
-          <a href="/support.html" className="underline underline-offset-4">Support</a>
+          <a href={`${import.meta.env.BASE_URL}privacy.html`} className="underline underline-offset-4">Privacy notice</a>
+          <a href={`${import.meta.env.BASE_URL}terms.html`} className="underline underline-offset-4">Terms of use</a>
+          <a href={`${import.meta.env.BASE_URL}support.html`} className="underline underline-offset-4">Support</a>
         </div>
       </section>
     </article>
